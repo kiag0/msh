@@ -43,7 +43,7 @@ router.post("/login",(req,res,next) => {
     User.findOne({phone: req.body.phone}).then(user=>{
         if(!user){
             return res.status(401).json({
-                message: "Phone Number is Wrong!"
+                message: "Incorrect credentials!"
             });
         } 
         uzer = user;
@@ -54,7 +54,7 @@ router.post("/login",(req,res,next) => {
         //no user
         if(!result){
             return res.status(401).json({
-                message: "Password is Wrong!"
+                message: "Incorrect credentials!"
             });
         }
         
