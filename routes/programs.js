@@ -41,7 +41,7 @@ router.get('', (req, res, next) => {
   });
   
   //edit program
-  router.put("/:id", CheckAuth,(req, res, next) => {
+  router.put("/:id",CheckAuth, (req, res, next) => {
     const newProgram = req.body;
     // Program.findOne({ _id: "5da98d6757b9fa16ac937415"})
     // Song.findOne({_id: req.params.id})
@@ -53,7 +53,7 @@ router.get('', (req, res, next) => {
     //   console.log(err);
     // });
     
-    Program.updateOne({_id: req.params.id}, newProgram)
+    Program.updateOne({_id: req.params.id, creator: req.userData.userId  }, newProgram)
     .then(result => {
        console.log(result);
        res.status(200).json({message: "true"});

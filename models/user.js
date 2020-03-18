@@ -11,7 +11,9 @@ const uniqueVal = require("mongoose-unique-validator");
 const userSchema = mongoose.Schema({
   
 phone : {type:String, required: true, unique: true},
-password : {type:String, required: true}
+password : {type:String, required: true},
+OTP: {type: String, required:true}
+
 
 });
 

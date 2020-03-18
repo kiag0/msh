@@ -10,11 +10,13 @@ const bodyParser = require("body-parser"); // acces values from the body sent fr
 const mongoose = require("mongoose"); // mongodb schema provider
 const cors = require("cors"); // allows cross origin access
 
+const forgotRoutes = require('./routes/forgot')
 const songRoutes = require('./routes/songs');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/categories');
 const programRoutes = require('./routes/programs');
 const searchRoutes = require('./routes/search'); 
+
 
 
 const app = express();
@@ -59,7 +61,9 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/programs', programRoutes);
 
 //search routes
-app.use('/api/search', searchRoutes);
+app.use('/api/search', searchRoutes); 
+
+app.use('/api/forgot', forgotRoutes);
 
 
 

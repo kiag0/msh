@@ -15,9 +15,22 @@ router.post("/signup", (req,res,next) =>{
     //create hash from user password
     cryptor.hash(req.body.password,3)
     .then(hash => {
+
+        generateCode = function(){
+            let theCode;
+            var fullNumber = [];
+            var digit1 = Math.floor(Math.random() * 9) + 1;
+            var digit2 = Math.floor(Math.random() * 9) + 1;
+            var digit3 = Math.floor(Math.random() * 9) + 1;
+            var digit4 = Math.floor(Math.random() * 9) + 1;
+            fullNumber.push(digit1, digit2, digit3, digit4);
+            return fullNumber.join("") ;
+          }
+          let otp = generateCode();
         const user = new User({
             phone: req.body.phone,
-            password: hash
+            password: hash,
+            OTP: otp
         });
         //save user in db
         user.save()
@@ -67,7 +80,8 @@ router.post("/login",(req,res,next) => {
             res.status(200).json({
                 message:"Login successful",
                 token:token,
-                expiresIn:3600000
+                expiresIn:3600000,
+                userId: uzer._id
             });
 
     })

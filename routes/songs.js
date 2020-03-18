@@ -67,7 +67,18 @@ router.post("",CheckAuth, (req, res, next) => {
     Song.updateOne({_id: req.params.id}, song)
     .then(result => {
        console.log(result);
-       res.status(200).json({message: "edit successful"});
+       if(result.nModified > 0){
+        res.status(201).json({
+          message: "Edit Successful",
+          status: true
+        });
+       }
+
+       res.status(200).json({
+         message: "Edit Not Successful. Try again later",
+         status: false
+       })
+       
     })
     .catch(err => {
       console.log(err);
@@ -78,7 +89,7 @@ router.post("",CheckAuth, (req, res, next) => {
   router.delete("/:id",CheckAuth, (req, res, next) => {
     Song.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
       if (result.n > 0 ){
-        res.status(200).json({ message: "Hymn deleted!" });
+        res.status(201).json({ message: "Hymn deleted!" });
       } else {
         res.status(401).json({ message: "You can not delete this hymn" });
       }
